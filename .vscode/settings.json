@@ -1,0 +1,10 @@
+{
+    "prettier.jsxSingleQuote": true,
+    "prettier.jsxBracketSameLine": true,
+    "prettier.useTabs": true,
+    "emmet.excludeLanguages": [
+    "   editor.formatOnSave",
+        "markdown"
+    ],
+    "editor.formatOnSave": true
+}
