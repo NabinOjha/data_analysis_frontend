@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import axios from 'axios';
 
@@ -8,13 +8,19 @@ const useApiCall = () => {
 	const [loading, setLoading] = useState(false),
 		[error, setError] = useState(null);
 
-	const sendRequest = async (method = 'GET', url, data = null) => {
+	const sendRequest = async (
+		method = 'GET',
+		url,
+		data = null,
+		headers = {}
+	) => {
 		setLoading(true);
 		try {
 			const response = await axios({
 				method: method.toLowerCase().trim(),
 				url,
 				data,
+				headers,
 			});
 			setLoading(false);
 			return response;

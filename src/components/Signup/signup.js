@@ -39,6 +39,7 @@ const Signup = () => {
 				password_confirmation: confirmPassword,
 			};
 			const response = await sendRequest('POST', '/auth', dataToSend);
+
 			response &&
 				currentUser.setCurrentUserCredentials(
 					response.headers.uid,

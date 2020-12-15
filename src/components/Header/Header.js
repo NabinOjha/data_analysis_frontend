@@ -2,12 +2,31 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+import useApiCall from '../../commons/hooks/apiCall';
 import userContext from './../../commons/context/userContext';
 
 const Header = () => {
 	const currentUser = useContext(userContext);
 
 	console.log(currentUser);
+
+	const [sendRequest, loading, error] = useApiCall();
+
+	const handleLogout = async () => {
+		const { uid, accessToken, client } = currentUser;
+		const headers = { uid, 'access-token': accessToken, client };
+
+		const response = await sendRequest(
+			'DELETE',
+			'/auth/sign_out',
+			null,
+			headers
+		);
+
+		if (response) currentUser.logout();
+	};
+
+	console.log({ loading, error });
 
 	return (
 		<HeaderStyle>
@@ -30,10 +49,10 @@ const Header = () => {
 						<>
 							{/* Link to invite users form Here */}
 							<li className='nav-item'>
-								<Link to='/login'>Invite users</Link>
-							</li>
-							<li className='nav-item user-email'>
 								<Link to='/dashboard'>Dashboard</Link>
+							</li>
+							<li className='nav-item user-email' onClick={handleLogout}>
+								Logout
 							</li>
 						</>
 					)}
@@ -67,8 +86,13 @@ const HeaderStyle = styled.header`
 			justify-content: space-between;
 			transistion: all 0.3s ease-in;
 			.nav-item {
+				font-size: 20px;
+				&:hover {
+					cursor: pointer;
+					color: #ddd;
+					transistion: all 0.4s ease-out;
+				}
 				a {
-					font-size: 20px;
 					color: #fff;
 					&:link,
 					&:visited {

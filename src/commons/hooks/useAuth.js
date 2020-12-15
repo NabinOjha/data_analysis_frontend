@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useAuth = () => {
 	const [uid, setUid] = useState(null),
@@ -17,7 +17,7 @@ const useAuth = () => {
 
 	const logout = () => {
 		setUid(null);
-		setClient(null);
+		setAccessToken(null);
 		setClient(null);
 		localStorage.removeItem('userData');
 	};

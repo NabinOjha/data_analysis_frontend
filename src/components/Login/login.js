@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Formik } from 'formik';
 
 import { Container, Form } from './../../commons/style';
 import InputField from '../InputField/inputField';
+import useApiCall from '../../commons/hooks/apiCall';
+import authContext from './../../commons/context/userContext';
 
 const Login = () => {
+	const [sendRequest, loading, error] = useApiCall();
+	const currentUser = useContext(authContext);
+
 	const intialFormValues = { email: '', password: '' };
+
 	const validate = ({ email, password }) => {
 		const errors = {};
 		if (!email) {
@@ -18,9 +24,22 @@ const Login = () => {
 		}
 		return errors;
 	};
-	const handleSubmit = (values) => {
-		console.log(values);
+	const handleSubmit = async ({ email, password }, { resetForm }) => {
+		const response = await sendRequest('POST', '/auth/sign_in', {
+			email,
+			password,
+		});
+		console.log(response);
+		response &&
+			currentUser.setCurrentUserCredentials(
+				response.headers.uid,
+				response.headers['access-token'],
+				response.headers.client
+			);
+		resetForm(intialFormValues);
 	};
+
+	console.log({ loading, error });
 	return (
 		<div className='login'>
 			<Container>
