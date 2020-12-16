@@ -3,9 +3,41 @@ import styled from 'styled-components';
 
 import ReactPaginate from 'react-paginate';
 
-const DataTable = () => {
-	const handlePageChange = (page) => {
-		console.log(page);
+const DataTable = ({ data, handlePagination, dataCount, limit }) => {
+	const handlePageChange = ({ selected }) => {
+		handlePagination(selected);
+	};
+
+	const renderData = () => {
+		return data.map((business) => {
+			const {
+				id,
+				name,
+				business_type,
+				phone,
+				address,
+				email,
+				num_employees,
+				avg_salary,
+				established_date,
+				total_branches,
+			} = business;
+
+			return (
+				<tr key={id}>
+					<td className='table-cell'>{id}</td>
+					<td className='table-cell'>{name}</td>
+					<td className='table-cell'>{business_type}</td>
+					<td className='table-cell'>{address}</td>
+					<td className='table-cell'>{phone}</td>
+					<td className='table-cell'>{email}</td>
+					<td className='table-cell'>{established_date}</td>
+					<td className='table-cell'>$ {avg_salary}</td>
+					<td className='table-cell'>{num_employees}</td>
+					<td className='table-cell'>{total_branches}</td>
+				</tr>
+			);
+		});
 	};
 
 	return (
@@ -25,123 +57,14 @@ const DataTable = () => {
 						<th className='table-head'>Total Branches</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td className='table-cell'>1</td>
-						<td className='table-cell'>Zoomzone</td>
-						<td className='table-cell'>partnership</td>
-						<td className='table-cell'>Peru</td>
-						<td className='table-cell'>530-153-2247</td>
-						<td className='table-cell'>mmatches1l@harvard.edu</td>
-						<td className='table-cell'>12/13/2019</td>
-						<td className='table-cell'>$ 53.74</td>
-						<td className='table-cell'>4</td>
-						<td className='table-cell'>12</td>
-					</tr>
-					<tr>
-						<td className='table-cell'>2</td>
-						<td className='table-cell'>Zoomzone</td>
-						<td className='table-cell'>partnership</td>
-						<td className='table-cell'>Peru</td>
-						<td className='table-cell'>530-153-2247</td>
-						<td className='table-cell'>mmatches1l@harvard.edu</td>
-						<td className='table-cell'>12/13/2019</td>
-						<td className='table-cell'>$ 53.74</td>
-						<td className='table-cell'>4</td>
-						<td className='table-cell'>12</td>
-					</tr>
-					<tr>
-						<td className='table-cell'>3</td>
-						<td className='table-cell'>Zoomzone</td>
-						<td className='table-cell'>partnership</td>
-						<td className='table-cell'>Peru</td>
-						<td className='table-cell'>530-153-2247</td>
-						<td className='table-cell'>mmatches1l@harvard.edu</td>
-						<td className='table-cell'>12/13/2019</td>
-						<td className='table-cell'>$ 53.74</td>
-						<td className='table-cell'>4</td>
-						<td className='table-cell'>12</td>
-					</tr>
-					<tr>
-						<td className='table-cell'>4</td>
-						<td className='table-cell'>Zoomzone</td>
-						<td className='table-cell'>partnership</td>
-						<td className='table-cell'>Peru</td>
-						<td className='table-cell'>530-153-2247</td>
-						<td className='table-cell'>mmatches1l@harvard.edu</td>
-						<td className='table-cell'>12/13/2019</td>
-						<td className='table-cell'>$ 53.74</td>
-						<td className='table-cell'>4</td>
-						<td className='table-cell'>12</td>
-					</tr>
-					<tr>
-						<td className='table-cell'>5</td>
-						<td className='table-cell'>Zoomzone</td>
-						<td className='table-cell'>partnership</td>
-						<td className='table-cell'>Peru</td>
-						<td className='table-cell'>530-153-2247</td>
-						<td className='table-cell'>mmatches1l@harvard.edu</td>
-						<td className='table-cell'>12/13/2019</td>
-						<td className='table-cell'>$ 53.74</td>
-						<td className='table-cell'>4</td>
-						<td className='table-cell'>12</td>
-					</tr>
-					<tr>
-						<td className='table-cell'>5</td>
-						<td className='table-cell'>Zoomzone</td>
-						<td className='table-cell'>partnership</td>
-						<td className='table-cell'>Peru</td>
-						<td className='table-cell'>530-153-2247</td>
-						<td className='table-cell'>mmatches1l@harvard.edu</td>
-						<td className='table-cell'>12/13/2019</td>
-						<td className='table-cell'>$ 53.74</td>
-						<td className='table-cell'>4</td>
-						<td className='table-cell'>12</td>
-					</tr>
-					<tr>
-						<td className='table-cell'>6</td>
-						<td className='table-cell'>Zoomzone</td>
-						<td className='table-cell'>partnership</td>
-						<td className='table-cell'>Peru</td>
-						<td className='table-cell'>530-153-2247</td>
-						<td className='table-cell'>mmatches1l@harvard.edu</td>
-						<td className='table-cell'>12/13/2019</td>
-						<td className='table-cell'>$ 53.74</td>
-						<td className='table-cell'>4</td>
-						<td className='table-cell'>12</td>
-					</tr>
-					<tr>
-						<td className='table-cell'>7</td>
-						<td className='table-cell'>Zoomzone</td>
-						<td className='table-cell'>partnership</td>
-						<td className='table-cell'>Peru</td>
-						<td className='table-cell'>530-153-2247</td>
-						<td className='table-cell'>mmatches1l@harvard.edu</td>
-						<td className='table-cell'>12/13/2019</td>
-						<td className='table-cell'>$ 53.74</td>
-						<td className='table-cell'>4</td>
-						<td className='table-cell'>12</td>
-					</tr>
-					<tr>
-						<td className='table-cell'>8</td>
-						<td className='table-cell'>Zoomzone</td>
-						<td className='table-cell'>partnership</td>
-						<td className='table-cell'>Peru</td>
-						<td className='table-cell'>530-153-2247</td>
-						<td className='table-cell'>mmatches1l@harvard.edu</td>
-						<td className='table-cell'>12/13/2019</td>
-						<td className='table-cell'>$ 53.74</td>
-						<td className='table-cell'>4</td>
-						<td className='table-cell'>12</td>
-					</tr>
-				</tbody>
+				<tbody>{renderData()}</tbody>
 			</table>
 			<div className='pagination'>
 				<ReactPaginate
-					pageCount={10}
+					pageCount={dataCount / limit}
 					pageRangeDisplayed={2}
 					marginPagesDisplayed={2}
-					initialPage={1}
+					initialPage={0}
 					onPageChange={handlePageChange}
 				/>
 			</div>
@@ -157,7 +80,7 @@ const DataTableStyled = styled.div`
 		border-collapse: collapse;
 		th {
 			padding: 10px 18px;
-
+			font-size: 15px;
 			border-right: 0.5px solid #555;
 		}
 
@@ -170,6 +93,7 @@ const DataTableStyled = styled.div`
 			text-align: center;
 			background-color: #fff;
 			border: 0.5px solid #555;
+			font-size: 15px;
 		}
 	}
 	.pagination {

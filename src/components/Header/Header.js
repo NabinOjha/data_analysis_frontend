@@ -8,8 +8,6 @@ import userContext from './../../commons/context/userContext';
 const Header = () => {
 	const currentUser = useContext(userContext);
 
-	console.log(currentUser);
-
 	const [sendRequest, loading, error] = useApiCall();
 
 	const handleLogout = async () => {
@@ -26,7 +24,7 @@ const Header = () => {
 		if (response) currentUser.logout();
 	};
 
-	console.log({ loading, error });
+	// console.log({ loading, error });
 
 	return (
 		<HeaderStyle>
