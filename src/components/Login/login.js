@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Formik } from 'formik';
 
 import { Container, Form } from './../../commons/style';
@@ -7,6 +8,7 @@ import useApiCall from '../../commons/hooks/apiCall';
 import authContext from './../../commons/context/userContext';
 
 const Login = () => {
+	const history = useHistory();
 	const [sendRequest, loading, error] = useApiCall();
 	const currentUser = useContext(authContext);
 
@@ -29,14 +31,16 @@ const Login = () => {
 			email,
 			password,
 		});
-		console.log(response);
+
 		response &&
 			currentUser.setCurrentUserCredentials(
 				response.headers.uid,
 				response.headers['access-token'],
 				response.headers.client
 			);
+
 		resetForm(intialFormValues);
+		response && response.statusText === 'OK' && history.push('/dashboard');
 	};
 
 	console.log({ loading, error });

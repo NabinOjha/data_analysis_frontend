@@ -26,38 +26,42 @@ const Header = () => {
 
 	// console.log({ loading, error });
 
-	return (
-		<HeaderStyle>
-			<Link className='logo' to='/'>
-				Logo
-			</Link>
+	if (loading) {
+		return <p>Loading Please Wait.....</p>;
+	} else {
+		return (
+			<HeaderStyle>
+				<Link className='logo' to='/'>
+					Logo
+				</Link>
 
-			<Navigation>
-				<ul className='nav-list'>
-					{!currentUser || !currentUser.loggedIn ? (
-						<>
-							<li className='nav-item'>
-								<Link to='signup'>Sign Up</Link>
-							</li>
-							<li className='nav-item'>
-								<Link to='/login'>Login</Link>
-							</li>
-						</>
-					) : (
-						<>
-							{/* Link to invite users form Here */}
-							<li className='nav-item'>
-								<Link to='/dashboard'>Dashboard</Link>
-							</li>
-							<li className='nav-item user-email' onClick={handleLogout}>
-								Logout
-							</li>
-						</>
-					)}
-				</ul>
-			</Navigation>
-		</HeaderStyle>
-	);
+				<Navigation>
+					<ul className='nav-list'>
+						{!currentUser || !currentUser.loggedIn ? (
+							<>
+								<li className='nav-item'>
+									<Link to='signup'>Sign Up</Link>
+								</li>
+								<li className='nav-item'>
+									<Link to='/login'>Login</Link>
+								</li>
+							</>
+						) : (
+							<>
+								{/* Link to invite users form Here */}
+								<li className='nav-item'>
+									<Link to='/dashboard'>Dashboard</Link>
+								</li>
+								<li className='nav-item user-email' onClick={handleLogout}>
+									Logout
+								</li>
+							</>
+						)}
+					</ul>
+				</Navigation>
+			</HeaderStyle>
+		);
+	}
 };
 
 const HeaderStyle = styled.header`

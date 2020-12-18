@@ -1,26 +1,26 @@
-import React, { useState, useRef, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useState, useRef, useEffect } from "react";
+import styled from "styled-components";
 
-import RangeSlider from './../RangeSlider/rangeslider';
-import DatePicker from './../DatePicker/DatePicker';
-import useApiCall from './../../commons/hooks/apiCall';
+import RangeSlider from "./../RangeSlider/rangeslider";
+import DatePicker from "./../DatePicker/DatePicker";
+import useApiCall from "./../../commons/hooks/apiCall";
 
 const SideBar = ({ handleRequestFilter }) => {
 	const ranges = useRef({});
 	const filter = useRef({});
 	const [sendRequest] = useApiCall();
 	const [name, setName] = useState({
-			nameField: '',
-			nameValue: '',
+			nameField: "",
+			nameValue: "",
 		}),
 		[dateRange, setDateRange] = useState({
-			startDate: '',
-			endDate: '',
+			startDate: "",
+			endDate: "",
 		});
 
 	useEffect(() => {
 		const fetchRanges = async () => {
-			const rangesResponse = await sendRequest('GET', '/ranges');
+			const rangesResponse = await sendRequest("GET", "/ranges");
 			ranges.current = rangesResponse.data;
 		};
 		fetchRanges();
@@ -57,7 +57,7 @@ const SideBar = ({ handleRequestFilter }) => {
 	const handleSalaryRange = (salaryRange) => {
 		const minSalary = salaryRange[0];
 		const maxSalary = salaryRange[1];
-		const filterName = 'avg_salary';
+		const filterName = "avg_salary";
 		if (filter.current[filterName]) checkAndUpdate(filterName);
 		filter.current[
 			filterName
@@ -69,7 +69,7 @@ const SideBar = ({ handleRequestFilter }) => {
 	const handleBranchesRange = (branchRange) => {
 		const minBranches = branchRange[0];
 		const maxBranches = branchRange[1];
-		const filterName = 'total_branches';
+		const filterName = "total_branches";
 
 		if (filter.current[filterName]) checkAndUpdate(filterName);
 		filter.current[
@@ -82,7 +82,7 @@ const SideBar = ({ handleRequestFilter }) => {
 	const handleEmployeesRange = (employeesRange) => {
 		const minEmpolyees = employeesRange[0];
 		const maxEmployees = employeesRange[1];
-		const filterName = 'num_employees';
+		const filterName = "num_employees";
 
 		if (filter.current[filterName]) checkAndUpdate(filterName);
 		filter.current[
@@ -93,7 +93,7 @@ const SideBar = ({ handleRequestFilter }) => {
 	};
 
 	const handleDateFilter = () => {
-		const filterName = 'established_date';
+		const filterName = "established_date";
 
 		if (filter.current[filterName]) checkAndUpdate(filterName);
 
@@ -105,7 +105,7 @@ const SideBar = ({ handleRequestFilter }) => {
 	};
 
 	const handleSort = (e) => {
-		const filterName = 'sort';
+		const filterName = "sort";
 		if (filter.current[filterName]) checkAndUpdate(filterName);
 
 		filter.current[filterName] = `sort=${e.target.value}`;
@@ -115,6 +115,16 @@ const SideBar = ({ handleRequestFilter }) => {
 
 	return (
 		<SideBarStyled>
+			<form className='invite-form'>
+				<h3 className='invite-title'>Invite User</h3>
+				<div className='invite-control'>
+					<label className='invite-label'>Email</label>
+					<input className='invite-input' placeholder='invite-friend' />
+				</div>
+				<button className='invite-submit' type='submit'>
+					Invite
+				</button>
+			</form>
 			<h3 className='filter-heading'>Filter Data</h3>
 			<form className='form-filter' onSubmit={handleNameFilter}>
 				<label htmlFor='filter-field' className='field-label'>
@@ -216,13 +226,13 @@ const SideBar = ({ handleRequestFilter }) => {
 					onChange={handleSort}>
 					<option value=''>Select field</option>
 					{[
-						'name',
-						'business_type',
-						'address',
-						'phone',
-						'num_empoyees',
-						'total_branches',
-						'avg_salary',
+						"name",
+						"business_type",
+						"address",
+						"phone",
+						"num_empoyees",
+						"total_branches",
+						"avg_salary",
 					].map((item, index) => {
 						return (
 							<option value={`${item}`} key={index}>

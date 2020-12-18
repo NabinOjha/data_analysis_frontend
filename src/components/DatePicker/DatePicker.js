@@ -15,7 +15,7 @@ const DatePickerComponent = ({ handleChange }) => {
 		<DatePicker
 			selected={currentDate}
 			onChange={handleDateChange}
-			dateFormat='yyyy-mm-dd'
+			// dateFormat='yyyy-mm-dd'
 		/>
 	);
 };

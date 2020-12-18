@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Formik } from 'formik';
 
 import { Container, Form } from '../../commons/style';
@@ -7,6 +8,7 @@ import useApiCall from '../../commons/hooks/apiCall';
 import userContext from './../../commons/context/userContext';
 
 const Signup = () => {
+	const history = useHistory();
 	const currentUser = useContext(userContext);
 	const initialFormValues = { email: '', password: '', confirmPassword: '' };
 	const [sendRequest, loading, error] = useApiCall();
@@ -39,6 +41,7 @@ const Signup = () => {
 				password_confirmation: confirmPassword,
 			};
 			const response = await sendRequest('POST', '/auth', dataToSend);
+			console.log(response);
 
 			response &&
 				currentUser.setCurrentUserCredentials(
@@ -46,12 +49,13 @@ const Signup = () => {
 					response.headers['access-token'],
 					response.headers.client
 				);
+
 			resetForm(initialFormValues);
+
+			response && response.statusText === 'OK' && history.push('/dashboard');
 		};
 		signUpUSer();
 	};
-
-	console.log({ loading, error });
 
 	return (
 		<div className='signup'>

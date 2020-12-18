@@ -13,7 +13,7 @@ const AnalysisDashBoard = () => {
 		[dataCount, setDataCount] = useState(0),
 		[limit] = useState(20);
 
-	const [sendRequest, loading, error] = useApiCall();
+	const [sendRequest, loading] = useApiCall();
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -27,7 +27,7 @@ const AnalysisDashBoard = () => {
 			setTableData(dataResponse.data.businesses);
 		};
 		fetchData();
-	}, [page, filter]);
+	}, [page, filter, limit]);
 
 	const handlePagination = (pageNum) => {
 		setPage(pageNum);
@@ -48,6 +48,7 @@ const AnalysisDashBoard = () => {
 						limit={limit}
 						handlePagination={handlePagination}
 						dataCount={dataCount}
+						loading={loading}
 					/>
 				</DashboardWrapper>
 			</Container>

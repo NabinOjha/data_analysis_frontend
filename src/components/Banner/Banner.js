@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-import BannerImage from './../../assets/images/Banner.jpg';
+import BannerImage from "./../../assets/images/Banner.jpg";
 
 const Banner = () => {
 	return (
